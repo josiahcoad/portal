@@ -18,21 +18,24 @@ import {
   NavItem,
 } from "../../common/Misc";
 
-import { getActivityByName, getAllActivities } from "../../libs/activitiesAPI";
+import { getActivityByName, getAllActivities, Activity } from "../../libs/activitiesAPI";
+import { getPageSets, getAllSets, SetInterface } from "../../libs/setsAPI";
+import { getPageActivities, PageSetActivity } from "../../libs/pageActivitiesAPI";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { getAllPages, getPageByName, Page } from "../../libs/pagesAPI";
 
 interface IndexPageProps {
   page?: Page;
   allPages?: Page[];
+  allSets?: PageSetActivity[];
 }
 
 /**
  * This page is for any of the tabs on the main page
  */
-const TabPage: React.FC<IndexPageProps> = ({ page, allPages }) => {
+const TabPage: React.FC<IndexPageProps> = ({ page, allPages, allSets }) => {
   const { user, status } = useActiveUser();
-
+  console.log(allSets);
   return (
     <>
       <Head>
@@ -79,32 +82,22 @@ const TabPage: React.FC<IndexPageProps> = ({ page, allPages }) => {
 TabPage.propTypes = {
   page: PropTypes.any,
   allPages: PropTypes.arrayOf(PropTypes.any),
+  allSets: PropTypes.arrayOf(PropTypes.any),
 };
 
 export default TabPage;
 
-/**
- * (1/2) Example of how to get activity sets for page "lectures"
- */
-import { getPageSets } from "../../libs/setsAPI";
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  /**
-   * (2/2) Example of how to get activity sets for page "lectures"
-   */
-  const result1 = await getPageSets("lectures");
-  console.log(result1);
-  console.log("     -----------------------------     ");
-  const result2 = await getPageSets("day_1");
-  console.log(result2);
-
   const tabId = (params ? params.tabId : "") as string;
   const page = await getPageByName(tabId);
   const allPages = await getAllPages();
+  const allSets = await getPageActivities(tabId);
+  console.log("finished call");
   return {
     props: {
       page,
       allPages,
+      allSets,
     },
   };
 };

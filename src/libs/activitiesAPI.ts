@@ -1,6 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { getSetByName } from "./setsAPI";
 
 const activityDirectory = join(process.cwd(), "db/activities");
 
@@ -46,4 +47,15 @@ export async function getAllActivities(): Promise<Activity[]> {
   const activityNames = await getActivityNames();
   const pages = activityNames.map((page) => getActivityByName(page));
   return Promise.all(pages);
+}
+
+/**
+ * @param {string} setName Name of the set you want the activities for.
+ * @returns {Promise<Activity[]>} list of contents of the activities listed in the set yaml
+ */
+export async function getActivitiesBySet(setName: string): Promise<Activity[]> {
+  const setData = await getSetByName(setName);
+  const activities = setData.activityList.map((activity) => getActivityByName(activity));
+
+  return Promise.all(activities);
 }
