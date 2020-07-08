@@ -35,7 +35,6 @@ interface IndexPageProps {
  */
 const TabPage: React.FC<IndexPageProps> = ({ page, allPages, allSets }) => {
   const { user, status } = useActiveUser();
-  console.log(allSets);
   return (
     <>
       <Head>
@@ -59,9 +58,11 @@ const TabPage: React.FC<IndexPageProps> = ({ page, allPages, allSets }) => {
       </NavPillsContainer>
 
       <EventsBlueWrapper>
-        <Container className="pt-4">
-          <Set info={set2Info}></Set>
-        </Container>
+        {allSets?.map((p) => (
+          <Container className="pt-4">
+            <Set info={p}></Set>
+          </Container>
+        ))}
       </EventsBlueWrapper>
 
       <Container className="pt-5">

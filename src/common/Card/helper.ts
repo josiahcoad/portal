@@ -12,8 +12,6 @@ export const formatTime = (time: Date, duration: number): string => {
    */
 
   return (
-    moment(time).format("MMMM Do h:mm a") +
-    " to " +
-    moment(new Date(time.getTime() + duration * 60000)).format("h:mm a")
+    "sometime to sometime"
   );
 };

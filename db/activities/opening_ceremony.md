@@ -1,11 +1,13 @@
 ---
-name: Opening Ceremony
+title: Opening Ceremony
 id: opening_ceremony
 startTime: June 20, 2020 10:30:00
+duration: 60
 endTime: June 20, 2020 11:30:00
 mediaType: embed_url
+infoUrl: '#'
 mediaLink: https://www.youtube.com/embed/Y6ljFaKRTrI
-thumbnail: https://picsum.photos/300
+imgUrl: https://picsum.photos/300
 presenter: Jon Doe
 priority: 7
 relatedActivities:

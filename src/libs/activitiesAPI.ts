@@ -13,13 +13,15 @@ export async function getActivityNames(): Promise<string[]> {
 }
 
 export interface Activity {
-  name: string;
+  title: string;
   id: string;
   startTime: Date;
+  duration: number;
   endTime: Date;
   mediaType: "meeting_url" | "embed_url";
+  infoUrl: string;
   mediaLink: string;
-  thumbnail: string;
+  imgUrl: string;
   presenter: string;
   priority: number;
   relatedActivities: string[];

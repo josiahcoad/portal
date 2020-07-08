@@ -16,7 +16,7 @@ export interface SetInterface {
   name: string;
   id: string;
   description: string;
-  showMoreState: string;
+  showMoreState: boolean;
   orderBy: "alphabetical" | "priority" | "start_time" | "none" | "";
   priority: number;
   activityList: string[];
